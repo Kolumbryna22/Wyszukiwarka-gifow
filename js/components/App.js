@@ -1,13 +1,13 @@
-App = React.createClass({
+class App extends React.Component {
     getInitialState() {
         return {
             loading: false,
             searchingText: '',
             gif: {},
         };
-    },
+    }
 
-    handleSearch: function(searchingText) {
+    handleSearch(searchingText) {
         this.setState({
             loading: true
         });
@@ -17,10 +17,10 @@ App = React.createClass({
                 gif: gif,
                 searchingText: searchingText
             });
-        }).bind(this);
-    },
+        }.bind(this));
+    }
 
-    getGif: function(searchingText, callback) {
+    getGif(searchingText, callback) {
         var url = 'http://api.giphy.com/v1/gifs/search?q=' + searchingText + '&api_key=dc6zaTOxFJmzC';
         var xhr = new XMLHttpRequest();
 
@@ -38,9 +38,9 @@ App = React.createClass({
             }
         };
         xhr.send();
-    },
+    }
 
-    render: function() {
+    render() {
         var styles = {
             margin: '0 auto',
             textAlign: 'center',
@@ -62,4 +62,4 @@ App = React.createClass({
             </div>
         );
     }
-});
+};
