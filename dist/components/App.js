@@ -9,32 +9,32 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var App = function (_React$Component) {
     _inherits(App, _React$Component);
 
-    function App() {
+    function App(props) {
         _classCallCheck(this, App);
 
-        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+        _this.state = {
+            loading: false,
+            searchingText: '',
+            gif: {}
+        };
+        return _this;
     }
 
     _createClass(App, [{
-        key: 'getInitialState',
-        value: function getInitialState() {
-            return {
-                loading: false,
-                searchingText: '',
-                gif: {}
-            };
-        }
-    }, {
         key: 'handleSearch',
         value: function handleSearch(searchingText) {
-            this.setState({
-                loading: true
+            this.setState(function (state) {
+                return { loading: true };
             });
             this.getGif(searchingText, function (gif) {
-                this.setState({
-                    loading: false,
-                    gif: gif,
-                    searchingText: searchingText
+                this.setState(function (state) {
+                    return {
+                        loading: false,
+                        gif: gif,
+                        searchingText: searchingText
+                    };
                 });
             }.bind(this));
         }

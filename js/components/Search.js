@@ -1,6 +1,7 @@
 class Search extends React.Component {
-    getInitialState() {
-        return {
+    constructor(props) {
+        super(props);
+        this.state = {
             searchingText: ''
         };
     }
@@ -8,8 +9,8 @@ class Search extends React.Component {
     handleChange(event) {
         var searchingText = event.target.value;
 
-        this.setState({
-            searchingText: searchingText
+        this.setState((state) => {
+            return {searchingText: searchingText};
         });
 
         if (searchingText.length > 2) {

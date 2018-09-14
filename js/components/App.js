@@ -1,6 +1,7 @@
 class App extends React.Component {
-    getInitialState() {
-        return {
+    constructor(props) {
+        super(props);
+        this.state = {
             loading: false,
             searchingText: '',
             gif: {},
@@ -8,14 +9,16 @@ class App extends React.Component {
     }
 
     handleSearch(searchingText) {
-        this.setState({
-            loading: true
+        this.setState((state) => {
+            return {loading: true};
         });
         this.getGif(searchingText, function(gif) {
-            this.setState({
-                loading: false,
-                gif: gif,
-                searchingText: searchingText
+            this.setState((state) => {
+                return {
+                    loading: false,
+                    gif: gif,
+                    searchingText: searchingText
+                };
             });
         }.bind(this));
     }

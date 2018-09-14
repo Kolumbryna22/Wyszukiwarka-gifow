@@ -9,26 +9,24 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Search = function (_React$Component) {
     _inherits(Search, _React$Component);
 
-    function Search() {
+    function Search(props) {
         _classCallCheck(this, Search);
 
-        return _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
+
+        _this.state = {
+            searchingText: ''
+        };
+        return _this;
     }
 
     _createClass(Search, [{
-        key: 'getInitialState',
-        value: function getInitialState() {
-            return {
-                searchingText: ''
-            };
-        }
-    }, {
         key: 'handleChange',
         value: function handleChange(event) {
             var searchingText = event.target.value;
 
-            this.setState({
-                searchingText: searchingText
+            this.setState(function (state) {
+                return { searchingText: searchingText };
             });
 
             if (searchingText.length > 2) {
