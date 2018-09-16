@@ -5,7 +5,7 @@ var styles = {
 }
 
 class Gif extends React.Component {
-    getUrl() {
+    getUrl = () => {
         return this.props.sourceUrl || GIPHY_LOADING_URL;
     }
 

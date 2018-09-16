@@ -8,7 +8,7 @@ class App extends React.Component {
         };
     }
 
-    handleSearch(searchingText) {
+    handleSearch = (searchingText) => {
         this.setState((state) => {
             return {loading: true};
         });

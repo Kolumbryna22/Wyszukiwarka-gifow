@@ -14,6 +14,24 @@ var Search = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).call(this, props));
 
+        _this.handleChange = function (event) {
+            var searchingText = event.target.value;
+
+            _this.setState(function (state) {
+                return { searchingText: searchingText };
+            });
+
+            if (searchingText.length > 2) {
+                _this.props.onSearch(searchingText);
+            }
+        };
+
+        _this.handleKeyUp = function (event) {
+            if (event.keyCode === 13) {
+                _this.props.onSearch(_this.state.searchingText);
+            }
+        };
+
         _this.state = {
             searchingText: ''
         };
@@ -21,26 +39,6 @@ var Search = function (_React$Component) {
     }
 
     _createClass(Search, [{
-        key: 'handleChange',
-        value: function handleChange(event) {
-            var searchingText = event.target.value;
-
-            this.setState(function (state) {
-                return { searchingText: searchingText };
-            });
-
-            if (searchingText.length > 2) {
-                this.props.onSearch(searchingText);
-            }
-        }
-    }, {
-        key: 'handleKeyUp',
-        value: function handleKeyUp(event) {
-            if (event.keyCode === 13) {
-                this.props.onSearch(this.state.searchingText);
-            }
-        }
-    }, {
         key: 'render',
         value: function render() {
             var styles = {

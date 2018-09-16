@@ -16,17 +16,22 @@ var Gif = function (_React$Component) {
     _inherits(Gif, _React$Component);
 
     function Gif() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
         _classCallCheck(this, Gif);
 
-        return _possibleConstructorReturn(this, (Gif.__proto__ || Object.getPrototypeOf(Gif)).apply(this, arguments));
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Gif.__proto__ || Object.getPrototypeOf(Gif)).call.apply(_ref, [this].concat(args))), _this), _this.getUrl = function () {
+            return _this.props.sourceUrl || GIPHY_LOADING_URL;
+        }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(Gif, [{
-        key: 'getUrl',
-        value: function getUrl() {
-            return this.props.sourceUrl || GIPHY_LOADING_URL;
-        }
-    }, {
         key: 'render',
         value: function render() {
             var url = this.props.loading ? GIPHY_LOADING_URL : this.props.url;

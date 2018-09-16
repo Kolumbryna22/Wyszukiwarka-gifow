@@ -14,6 +14,21 @@ var App = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
+        _this.handleSearch = function (searchingText) {
+            _this.setState(function (state) {
+                return { loading: true };
+            });
+            _this.getGif(searchingText, function (gif) {
+                this.setState(function (state) {
+                    return {
+                        loading: false,
+                        gif: gif,
+                        searchingText: searchingText
+                    };
+                });
+            }.bind(_this));
+        };
+
         _this.state = {
             loading: false,
             searchingText: '',
@@ -23,22 +38,6 @@ var App = function (_React$Component) {
     }
 
     _createClass(App, [{
-        key: 'handleSearch',
-        value: function handleSearch(searchingText) {
-            this.setState(function (state) {
-                return { loading: true };
-            });
-            this.getGif(searchingText, function (gif) {
-                this.setState(function (state) {
-                    return {
-                        loading: false,
-                        gif: gif,
-                        searchingText: searchingText
-                    };
-                });
-            }.bind(this));
-        }
-    }, {
         key: 'getGif',
         value: function getGif(searchingText, callback) {
             var url = 'http://api.giphy.com/v1/gifs/search?q=' + searchingText + '&api_key=dc6zaTOxFJmzC';

@@ -6,7 +6,7 @@ class Search extends React.Component {
         };
     }
 
-    handleChange(event) {
+    handleChange = (event) => {
         var searchingText = event.target.value;
 
         this.setState((state) => {
@@ -18,7 +18,7 @@ class Search extends React.Component {
         }
     }
     
-    handleKeyUp(event) {
+    handleKeyUp = (event) => {
         if (event.keyCode === 13) {
             this.props.onSearch(this.state.searchingText);
         }
