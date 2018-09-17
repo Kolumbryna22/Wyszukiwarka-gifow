@@ -24,15 +24,15 @@ class App extends React.Component {
     }
 
     getGif(searchingText, callback) {
-        var url = 'http://api.giphy.com/v1/gifs/search?q=' + searchingText + '&api_key=dc6zaTOxFJmzC';
-        var xhr = new XMLHttpRequest();
+        const url = 'http://api.giphy.com/v1/gifs/search?q=' + searchingText + '&api_key=dc6zaTOxFJmzC';
+        let xhr = new XMLHttpRequest();
 
         xhr.open('GET', url);
         xhr.onload = function() {
             if (xhr.status === 200) {
-                var data = JSON.parse(xhr.responseText).data;
+                let data = JSON.parse(xhr.responseText).data[0];
                 console.log(data);
-                var gif = {
+                let gif = {
                     url: data.fixed_width_downsampled_url,
                     sourceUrl: data.url
                 };
@@ -44,7 +44,7 @@ class App extends React.Component {
     }
 
     render() {
-        var styles = {
+        const styles = {
             margin: '0 auto',
             textAlign: 'center',
             width: '90%',

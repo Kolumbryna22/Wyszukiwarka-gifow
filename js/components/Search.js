@@ -7,7 +7,7 @@ class Search extends React.Component {
     }
 
     handleChange = (event) => {
-        var searchingText = event.target.value;
+        const searchingText = event.target.value;
 
         this.setState((state) => {
             return {searchingText: searchingText};
@@ -25,7 +25,7 @@ class Search extends React.Component {
     }
 
     render() {
-        var styles = {
+        const styles = {
             fontSize: '1.5em',
             width: '90%',
             maxWidth: '350px',
