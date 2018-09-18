@@ -47,9 +47,8 @@ var App = function (_React$Component) {
             xhr.onload = function () {
                 if (xhr.status === 200) {
                     var data = JSON.parse(xhr.responseText).data[0];
-                    console.log(data);
                     var gif = {
-                        url: data.fixed_width_downsampled_url,
+                        url: data.images.fixed_width_downsampled.webp,
                         sourceUrl: data.url
                     };
 

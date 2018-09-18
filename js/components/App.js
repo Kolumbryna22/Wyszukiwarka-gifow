@@ -31,9 +31,8 @@ class App extends React.Component {
         xhr.onload = function() {
             if (xhr.status === 200) {
                 let data = JSON.parse(xhr.responseText).data[0];
-                console.log(data);
                 let gif = {
-                    url: data.fixed_width_downsampled_url,
+                    url: data.images.fixed_width_downsampled.webp,
                     sourceUrl: data.url
                 };
 
