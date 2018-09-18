@@ -46,7 +46,8 @@ var App = function (_React$Component) {
             xhr.open('GET', url);
             xhr.onload = function () {
                 if (xhr.status === 200) {
-                    var data = JSON.parse(xhr.responseText).data[0];
+                    var number = Math.floor(Math.random() * 25);
+                    var data = JSON.parse(xhr.responseText).data[number];
                     var gif = {
                         url: data.images.fixed_width_downsampled.webp,
                         sourceUrl: data.url

@@ -30,7 +30,8 @@ class App extends React.Component {
         xhr.open('GET', url);
         xhr.onload = function() {
             if (xhr.status === 200) {
-                let data = JSON.parse(xhr.responseText).data[0];
+                let number = Math.floor(Math.random() * 25);
+                let data = JSON.parse(xhr.responseText).data[number];
                 let gif = {
                     url: data.images.fixed_width_downsampled.webp,
                     sourceUrl: data.url
