@@ -46,17 +46,39 @@ var App = function (_React$Component) {
             xhr.open('GET', url);
             xhr.onload = function () {
                 if (xhr.status === 200) {
-                    var number = Math.floor(Math.random() * 25);
-                    var data = JSON.parse(xhr.responseText).data[number];
-                    var gif = {
-                        url: data.images.fixed_width_downsampled.webp,
-                        sourceUrl: data.url
-                    };
+                    // let number = Math.floor(Math.random() * 25);
+                    // let data = JSON.parse(xhr.responseText).data[number];
+                    // let gif = {
+                    //     url: data.images.fixed_width_downsampled.webp,
+                    //     sourceUrl: data.url
+                    // };
+                    var gif = [];
+                    var data = JSON.parse(xhr.responseText).data;
+
+                    gif = data.map(function (item) {
+                        return gif = {
+                            url: item.images.fixed_width_downsampled.webp,
+                            sourceUrl: item.url
+                        };
+                    });
 
                     callback(gif);
                 }
             };
             xhr.send();
+        }
+    }, {
+        key: 'renderGifs',
+        value: function renderGifs() {
+            var _this2 = this;
+
+            return this.state.gif.map(function (item) {
+                return React.createElement(Gif, {
+                    loading: _this2.state.loading,
+                    url: item.url,
+                    sourceUrl: item.sourceUrl
+                });
+            });
         }
     }, {
         key: 'render',
@@ -66,6 +88,7 @@ var App = function (_React$Component) {
                 textAlign: 'center',
                 width: '90%'
             };
+            var gifs = this.renderGifs;
 
             return React.createElement(
                 'div',
@@ -89,11 +112,11 @@ var App = function (_React$Component) {
                 React.createElement(Search, {
                     onSearch: this.handleSearch
                 }),
-                React.createElement(Gif, {
-                    loading: this.state.loading,
-                    url: this.state.gif.url,
-                    sourceUrl: this.state.gif.sourceUrl
-                })
+                React.createElement(
+                    'div',
+                    null,
+                    gifs
+                )
             );
         }
     }]);

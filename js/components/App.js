@@ -30,17 +30,32 @@ class App extends React.Component {
         xhr.open('GET', url);
         xhr.onload = function() {
             if (xhr.status === 200) {
-                let number = Math.floor(Math.random() * 25);
-                let data = JSON.parse(xhr.responseText).data[number];
-                let gif = {
-                    url: data.images.fixed_width_downsampled.webp,
-                    sourceUrl: data.url
-                };
+                // let number = Math.floor(Math.random() * 25);
+                // let data = JSON.parse(xhr.responseText).data[number];
+                // let gif = {
+                //     url: data.images.fixed_width_downsampled.webp,
+                //     sourceUrl: data.url
+                // };
+                let gif = [];
+                let data = JSON.parse(xhr.responseText).data;
+                
+                gif = data.map(item => gif = {
+                    url: item.images.fixed_width_downsampled.webp,
+                    sourceUrl: item.url
+                });
 
                 callback(gif);
             }
         };
         xhr.send();
+    }
+
+    renderGifs() {
+        return this.state.gif.map(item => <Gif 
+                loading={this.state.loading}
+                url={item.url}
+                sourceUrl={item.sourceUrl}
+            />);
     }
 
     render() {
@@ -49,6 +64,7 @@ class App extends React.Component {
             textAlign: 'center',
             width: '90%',
         };
+        const gifs = this.renderGifs;
 
         return (
             <div style={styles}>
@@ -57,11 +73,7 @@ class App extends React.Component {
                 <Search 
                     onSearch={this.handleSearch}
                 />
-                <Gif 
-                    loading={this.state.loading}
-                    url={this.state.gif.url}
-                    sourceUrl={this.state.gif.sourceUrl}
-                />
+                <div>{gifs}</div>
             </div>
         );
     }
