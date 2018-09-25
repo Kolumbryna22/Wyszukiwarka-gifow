@@ -32,7 +32,7 @@ var App = function (_React$Component) {
         _this.state = {
             loading: false,
             searchingText: '',
-            gif: {}
+            gif: []
         };
         return _this;
     }
@@ -46,12 +46,6 @@ var App = function (_React$Component) {
             xhr.open('GET', url);
             xhr.onload = function () {
                 if (xhr.status === 200) {
-                    // let number = Math.floor(Math.random() * 25);
-                    // let data = JSON.parse(xhr.responseText).data[number];
-                    // let gif = {
-                    //     url: data.images.fixed_width_downsampled.webp,
-                    //     sourceUrl: data.url
-                    // };
                     var gif = [];
                     var data = JSON.parse(xhr.responseText).data;
 
@@ -72,10 +66,11 @@ var App = function (_React$Component) {
         value: function renderGifs() {
             var _this2 = this;
 
-            return this.state.gif.map(function (item) {
+            return this.state.gif.map(function (item, index) {
                 return React.createElement(Gif, {
                     loading: _this2.state.loading,
                     url: item.url,
+                    key: index,
                     sourceUrl: item.sourceUrl
                 });
             });
@@ -88,7 +83,7 @@ var App = function (_React$Component) {
                 textAlign: 'center',
                 width: '90%'
             };
-            var gifs = this.renderGifs;
+            var gifs = this.renderGifs();
 
             return React.createElement(
                 'div',
