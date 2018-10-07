@@ -41,25 +41,21 @@ var App = function (_React$Component) {
         key: 'getGif',
         value: function getGif(searchingText, callback) {
             var url = 'http://api.giphy.com/v1/gifs/search?q=' + searchingText + '&api_key=dc6zaTOxFJmzC';
-            var xhr = new XMLHttpRequest();
 
-            xhr.open('GET', url);
-            xhr.onload = function () {
-                if (xhr.status === 200) {
-                    var gif = [];
-                    var data = JSON.parse(xhr.responseText).data;
+            axios.get(url).then(function (response) {
+                var gif = [];
+                var data = response.data.data;
+                console.log(data);
 
-                    gif = data.map(function (item) {
-                        return gif = {
-                            url: item.images.fixed_width_downsampled.webp,
-                            sourceUrl: item.url
-                        };
-                    });
+                gif = data.map(function (item) {
+                    return gif = {
+                        url: item.images.fixed_width_downsampled.webp,
+                        sourceUrl: item.url
+                    };
+                });
 
-                    callback(gif);
-                }
-            };
-            xhr.send();
+                callback(gif);
+            });
         }
     }, {
         key: 'renderGifs',

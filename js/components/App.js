@@ -25,13 +25,12 @@ class App extends React.Component {
 
     getGif(searchingText, callback) {
         const url = 'http://api.giphy.com/v1/gifs/search?q=' + searchingText + '&api_key=dc6zaTOxFJmzC';
-        let xhr = new XMLHttpRequest();
 
-        xhr.open('GET', url);
-        xhr.onload = function() {
-            if (xhr.status === 200) {
+        axios.get(url)
+            .then(function (response) {
                 let gif = [];
-                let data = JSON.parse(xhr.responseText).data;
+                let data = response.data.data;
+                console.log(data);
                 
                 gif = data.map(item => gif = {
                     url: item.images.fixed_width_downsampled.webp,
@@ -39,9 +38,7 @@ class App extends React.Component {
                 });
 
                 callback(gif);
-            }
-        };
-        xhr.send();
+            });
     }
 
     renderGifs() {
