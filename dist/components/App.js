@@ -42,10 +42,28 @@ var App = function (_React$Component) {
         value: function getGif(searchingText, callback) {
             var url = 'http://api.giphy.com/v1/gifs/search?q=' + searchingText + '&api_key=dc6zaTOxFJmzC';
 
-            axios.get(url).then(function (response) {
+            // Promises using axios
+            // axios.get(url)
+            //     .then(function (response) {
+            //         let gif = [];
+            //         let data = response.data.data;
+            //         console.log(data);
+
+            //         gif = data.map(item => gif = {
+            //             url: item.images.fixed_width_downsampled.webp,
+            //             sourceUrl: item.url
+            //         });
+
+            //         callback(gif);
+            //     });
+
+            // Promises using native promises
+            this.httpGet(url).then(function (response) {
                 var gif = [];
-                var data = response.data.data;
-                console.log(data);
+                var data = void 0;
+
+                response = JSON.parse(response);
+                data = response.data;
 
                 gif = data.map(function (item) {
                     return gif = {
@@ -55,6 +73,31 @@ var App = function (_React$Component) {
                 });
 
                 callback(gif);
+            }).catch(function (error) {
+                console.error(error);
+            });
+        }
+
+        // function to promises
+
+    }, {
+        key: 'httpGet',
+        value: function httpGet(url) {
+            return new Promise(function (resolve, reject) {
+                var request = new XMLHttpRequest();
+
+                request.onload = function () {
+                    if (this.status === 200) {
+                        resolve(this.response);
+                    } else {
+                        reject(new Error(this.statusText));
+                    }
+                };
+                request.onerror = function () {
+                    reject(new Error('XMLHttpRequest Error: ' + this.statusText));
+                };
+                request.open('GET', url);
+                request.send();
             });
         }
     }, {

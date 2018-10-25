@@ -28,6 +28,7 @@
   "devDependencies": {
     "autoprefixer-cli": "^1.0.0",
     "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-react-app": "^3.1.2",
     "browser-sync": "^2.24.5",
     "globstar": "^1.0.0",

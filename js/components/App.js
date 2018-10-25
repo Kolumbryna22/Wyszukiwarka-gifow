@@ -26,11 +26,29 @@ class App extends React.Component {
     getGif(searchingText, callback) {
         const url = 'http://api.giphy.com/v1/gifs/search?q=' + searchingText + '&api_key=dc6zaTOxFJmzC';
 
-        axios.get(url)
+        // Promises using axios
+        // axios.get(url)
+        //     .then(function (response) {
+        //         let gif = [];
+        //         let data = response.data.data;
+        //         console.log(data);
+                
+        //         gif = data.map(item => gif = {
+        //             url: item.images.fixed_width_downsampled.webp,
+        //             sourceUrl: item.url
+        //         });
+
+        //         callback(gif);
+        //     });
+
+        // Promises using native promises
+        this.httpGet(url)
             .then(function (response) {
                 let gif = [];
-                let data = response.data.data;
-                console.log(data);
+                let data;
+
+                response = JSON.parse(response);
+                data = response.data;
                 
                 gif = data.map(item => gif = {
                     url: item.images.fixed_width_downsampled.webp,
@@ -38,6 +56,31 @@ class App extends React.Component {
                 });
 
                 callback(gif);
+            })
+            .catch(function(error) {
+                console.error(error);
+            });
+    }
+
+    // function to promises
+    httpGet(url) {
+        return new Promise (
+            function(resolve, reject) {
+                const request = new XMLHttpRequest();
+
+                request.onload = function() {
+                    if (this.status === 200) {
+                        resolve(this.response);
+                    } else {
+                        reject(new Error(this.statusText));
+                    }
+                };
+                request.onerror = function() {
+                    reject(new Error (
+                        `XMLHttpRequest Error: ${this.statusText}`));
+                };
+                request.open('GET', url);
+                request.send();
             });
     }
 
